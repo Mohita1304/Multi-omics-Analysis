@@ -1,1 +1,1 @@
-# A comprehensive computational investigation of colorectal cancer using multiomics analysi
+# A comprehensive multi-omics analysis revealed potential prognostic and diagnostic biomarkers for colorectal cancer.
