@@ -1,4 +1,4 @@
-setwd("/home/sukanta-mondal/Documents/cBioPortal/Multi_Omics_Analysis/WGCNA/WGCNA/")
+setwd("/path/")
 
 library(DESeq2)
 library(tidyverse)
@@ -71,7 +71,7 @@ grid.arrange(a1, a2, nrow = 2)
 ggsave("plot_output.png", arrangeGrob(a1, a2, nrow = 2))
 
 
-soft_power <- 18
+soft_power <- 18  # selected the soft threshold value 
 temp_cor <- cor
 cor <- WGCNA::cor
 
@@ -202,7 +202,7 @@ write.csv(merged_df, file="/home/sukanta-mondal/Documents/cBioPortal/Multi_Omics
 
 
 
-# TO get the hub genes based on the  Hugh Gene Signifcacne and modulemembership
+# TO get the hub genes based on the Gene Signifcacne and modulemembership
 
 # Define the thresholds
 mm_threshold <- 0.8
