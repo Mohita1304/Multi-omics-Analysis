@@ -2,7 +2,7 @@ library("survival")
 library("survminer")
 library('pROC')
 library('rpart')
-setwd("/home/sukanta-mondal/Documents/cBioPortal/Multi_Omics_Analysis/CNA_mRNA/OS_SA/DEG_CNA_OS/ROC/")
+setwd("/home/DEG_CNA_OS/ROC/")
 df<-read.csv("Four_Genes.csv", header = TRUE, sep=",", row.names = 1)
 #View(df)
 AUC_Value=c()
@@ -48,7 +48,7 @@ for (i in i:1001) {
       next
     }
     # Plot ROC curve
-    # z<-sprintf('/home/sukanta-mondal/Documents/cBioPortal/Multi_Omics_Analysis/CNA_mRNA/OS_SA/DEG_CNA_OS/ROC/COX/OneYear/% s.png', i)
+    # z<-sprintf('/home/OneYear/% s.png', i)
     #png(z, width = 800, height = 600)
     # plot(roc_data, main=paste("ROC Curve at", time_point, "months"))
     
@@ -65,4 +65,4 @@ for (i in i:1001) {
 }
 print(AUC_Value)
 RPART_AUC<-as.data.frame(AUC_Value)
-write.csv(RPART_AUC, file="/home/sukanta-mondal/Documents/cBioPortal/Multi_Omics_Analysis/CNA_mRNA/OS_SA/DEG_CNA_OS/ROC/COX/COX_AUC_1years_4.csv")
+write.csv(RPART_AUC, file="/home/COX_AUC_1years_4.csv")
