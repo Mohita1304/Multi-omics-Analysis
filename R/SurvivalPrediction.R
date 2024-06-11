@@ -1,68 +1,87 @@
+# Insatll and load the following libraries
+
 library("survival")
 library("survminer")
 library('pROC')
 library('rpart')
-setwd("/home/DEG_CNA_OS/ROC/")
-df<-read.csv("Four_Genes.csv", header = TRUE, sep=",", row.names = 1)
-#View(df)
-AUC_Value=c()
-i=0
-for (i in i:1001) {
-  #df<-read.csv("Four_Genes.csv", header = TRUE, sep=",", row.names = 1)
-  
-  #df<-read.csv("Two_Genes.csv", header = TRUE, sep=",", row.names = 1)
-  
-  # Separate features (X) and target variable (y)
-  X <- df[, !(names(df) %in% c('OS_MONTHS', 'OS_STATUS'))]
-  y <- df[, c('OS_STATUS', 'OS_MONTHS')]
-  
-  # Split the data into training and testing sets
-  #set.seed(42)  # For reproducibility
-  train_index <- sample(nrow(df), 0.8 * nrow(df))
-  X_train <- X[train_index, ]
-  X_test <- X[-train_index, ]
-  y_train <- y[train_index, ]
-  y_test <- y[-train_index, ]
-  
-  # Example: Training your survival model
-  surv_model <- coxph(Surv(OS_MONTHS, OS_STATUS) ~ ., data = data.frame(X_train, y_train))
-  #surv_model <- rpart(Surv(OS_MONTHS, OS_STATUS) ~ ., data = data.frame(X_train, y_train))
-  
-  # Example: Getting predictions for the test data
-  surv_prob <- predict(surv_model, newdata = data.frame(X_test), se.fit = TRUE)
-  
-  # Example: Calculating time-dependent ROC curves for 1, 3, and 5 years
-  time_points <- c(12)  # Time points in months
-  for (time_point in time_points) {
-    # Calculate survival status at the specified time point
-    status_at_time <- ifelse(y_test$OS_MONTHS <= time_point & y_test$OS_STATUS == 1, 1, 0)
-    
-    # Calculate sensitivity and specificity for different thresholds
-    #roc_data <- roc(status_at_time, 1 - surv_prob$fit, levels=c(0,1))
-    #roc_data <- roc(status_at_time, 1 - surv_prob$, levels = c(0, 1))
-    if (sum(status_at_time) > 0) {
-      roc_data <- roc(status_at_time, 1 - surv_prob$fit, levels=c(0,1))
-    }
-    else
-    {
-      next
-    }
-    # Plot ROC curve
-    # z<-sprintf('/home/OneYear/% s.png', i)
-    #png(z, width = 800, height = 600)
-    # plot(roc_data, main=paste("ROC Curve at", time_point, "months"))
-    
-    
-    
-    # Calculate AUC and display it on the plot
-    auc_val <- auc(roc_data)
-    
-    #print(auc_val)
-    AUC_Value= c(AUC_Value, auc_val)
-    #text(0.8, 0.2, paste("AUC =", round(auc_val, 2)))
-    #dev.off()
-  }
-}
-print(AUC_Value)
-RPART_AUC<-as.data.frame(AUC_Value)
-write.csv(RPART_AUC, file="/home/COX_AUC_1years_4.csv")
+
+# Survival prediction using the risk score for each sample
+
+# Read the data
+# Training datasets
+df <- read.csv("C:/Users/RS_c.csv") 
+ # external test datasets 1
+data <- read.csv("C:/User/RS_m.csv")
+# external test dataset 2
+data1 <- read.csv("C:/User/RS_m2.csv") 
+df1 <- df[, 2:4]
+df2 <- data[, 2:4]
+df3 <- data1[, 2:4]
+
+# Define the proportion for the split
+train_proportion <- 0.8
+n_train <- round(nrow(df1) * train_proportion)
+
+# Specify the best seed found from the previous analysis
+best_seed <- 89 # Replace this with the seed found from the previous analysis
+
+# Set the seed
+set.seed(best_seed)
+
+# Shuffle the data
+df1 <- df1[sample(nrow(df1)), ]
+
+# Split the data into training and testing sets
+train_data <- df1[1:n_train, ]
+test_data <- df1[(n_train + 1):nrow(df1), ]
+
+# Fit Cox proportional hazards model on training data
+surv_model <- coxph(Surv(OS_MONTH, OS_STATUS) ~ ., data = train_data)
+
+# Predict survival probabilities for test data
+surv_prob1 <- predict(surv_model, newdata = test_data, type = "risk")
+
+# Predict survival probabilities for df2
+surv_prob2 <- predict(surv_model, newdata = df2, type = "risk")
+
+# Predict survival probabilities for df3
+surv_prob3 <- predict(surv_model, newdata = df3, type = "risk")
+
+# Define time points for ROC curve calculation (1 year = 12 months)
+time_point <- 60
+
+# Calculate survival status at the specified time point for test data
+status_at_time_test <- ifelse(test_data$OS_MONTH <= time_point & test_data$OS_STATUS == 1, 1, 0)
+
+# Calculate survival status at the specified time point for df2
+status_at_time_df2 <- ifelse(df2$OS_MONTH <= time_point & df2$OS_STATUS == 1, 1, 0)
+
+# Calculate survival status at the specified time point for df3
+status_at_time_df3 <- ifelse(df3$OS_MONTH <= time_point & df3$OS_STATUS == 1, 1, 0)
+
+# Calculate ROC curve for test data
+roc_test <- roc(status_at_time_test, 1 - surv_prob1, levels = c(0, 1))
+auc_test <- auc(roc_test)
+
+# Calculate ROC curve for df2
+roc_df2 <- roc(status_at_time_df2, 1 - surv_prob2, levels = c(0, 1))
+auc_df2 <- auc(roc_df2)
+
+# Calculate ROC curve for df3
+roc_df3 <- roc(status_at_time_df3, 1 - surv_prob3, levels = c(0, 1))
+auc_df3 <- auc(roc_df3)
+
+# Plot ROC curves
+plot(roc_test, main = "ROC Curves 5 year", col = "red", lwd = 2)
+lines(roc_df2, col = "blue", lwd = 2)
+lines(roc_df3, col = "green", lwd = 2)
+legend("bottomright", legend = c(paste("cBioPortal AUC =", round(auc_test, 2)), 
+                                 paste("GSE29623 AUC =", round(auc_df2, 2)), 
+                                 paste("GSE17536 AUC =", round(auc_df3, 2))), 
+       col = c("red", "blue", "green"), lwd = 2)
+
+# Print the AUC values
+print(paste("Test data AUC:", auc_test))
+print(paste("DF2 AUC:", auc_df2))
+print(paste("DF3 AUC:", auc_df3))
+
