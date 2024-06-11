@@ -3,7 +3,7 @@
 
 **Authors:** Mohita Mahajan, Subodh Dhabalia, Tirtharaj Dash, Angshuman Sarkar and Sukanta Mondal
 
-<img src="Figs/GraphicalAbstract.png" alt="Graphical Abstract" width="200"/ class="center">
+<img src="Figs/GraphicalAbstract.png" alt="Graphical Abstract" width="200" class="center"/>
 
 **Highlights:**
 
@@ -36,8 +36,8 @@ All data analyzed in this study were sourced from publicly available databases:
 
 We have made this article as a preprint on bioRxiv:
 
- - Published article: [official]() #when the paper is published)
- - Preprint URL: [bioRxiv]() #url will be inserted here)
+ - Published article: [official]() # when the paper is published
+ - Preprint URL: [bioRxiv]() # url will be inserted here
 
 **Cite as:**
 
