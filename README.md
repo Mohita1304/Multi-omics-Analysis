@@ -3,7 +3,7 @@
 
 **Authors:** Mohita Mahajan, Subodh Dhabalia, Tirtharaj Dash, Angshuman Sarkar and Sukanta Mondal
 
-![Graphical Abstract](/home/dash/Desktop/Multi-omics-Analysis/Figs/GraphicalAbstract.tiff "Graphical Abstract")
+![Graphical Abstract](Figs/GraphicalAbstract.tiff "Graphical Abstract")
 
 **Highlights:**
 
