@@ -3,8 +3,6 @@
 
 **Authors:** Mohita Mahajan, Subodh Dhabalia, Tirtharaj Dash, Angshuman Sarkar and Sukanta Mondal
 
-<img src="Figs/GraphicalAbstract.png" alt="Graphical Abstract" width="200" class="center"/>
-
 **Highlights:**
 
  - Integration of multi-omics data to discover the colorectal cancer (CRC) biomarkers
@@ -12,6 +10,12 @@
  - Seven genes were identified for diagnosis and staging of CRC using machine learning
  - Gene expression and regulatory information used to calculate the regulatory strength
  - Calculated gene regulatory strength improved early vs. late-stage CRC prediction
+
+**Graphical Abstract:**
+
+<div style="text-align: center;">
+  <img src="Figs/GraphicalAbstract.png" alt="Graphical Abstract" width="500"/>
+</div>
 
 **Datasets:**
 
