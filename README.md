@@ -3,7 +3,7 @@
 
 **Authors:** Mohita Mahajan, Subodh Dhabalia, Tirtharaj Dash, Angshuman Sarkar and Sukanta Mondal
 
-![Graphical Abstract](Figs/GraphicalAbstract.png "Graphical Abstract")
+<img src="Figs/GraphicalAbstract.png" alt="Graphical Abstract" width="200"/ class="center">
 
 **Highlights:**
 
