@@ -40,16 +40,29 @@ All data analyzed in this study were sourced from publicly available databases:
 
 We have made this article as a preprint on bioRxiv:
 
- - Published article: [official]() # when the paper is published
- - Preprint URL: [bioRxiv]() # url will be inserted here
+ - Published article: [official]()
+ - Preprint URL: [bioRxiv](https://doi.org/10.1101/2024.06.10.598127)
 
 **Cite as:**
 
 [APA]
 
-*will be inserted here*
+`Mahajan, M., Dhabalia, S., Dash, T., Sarkar, A., & Mondal, S. (2024). A comprehensive multi-omics study reveals potential prognostic and diagnostic biomarkers for colorectal cancer. bioRxiv. https://doi.org/10.1101/2024.06.10.598127`
 
 [BIB]
 
-`will be inserted later`
+```bibtex
+@article {Mahajan2024.06.10.598127,
+	author = {Mahajan, Mohita and Dhabalia, Subodh and Dash, Tirtharaj and Sarkar, Angshuman and Mondal, Sukanta},
+	title = {A comprehensive multi-omics study reveals potential prognostic and diagnostic biomarkers for colorectal cancer},
+	elocation-id = {2024.06.10.598127},
+	year = {2024},
+	doi = {10.1101/2024.06.10.598127},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2024/06/11/2024.06.10.598127},
+	eprint = {https://www.biorxiv.org/content/early/2024/06/11/2024.06.10.598127.full.pdf},
+	journal = {bioRxiv}
+}
+```
+
 
